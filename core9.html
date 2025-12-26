@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carta de Navidad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Georgia, serif;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* VIDEO FONDO */
+.video-fondo{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:-1;
+}
+
+/* CONTENEDOR */
+.contenedor{
+    height:100%;
+    overflow-y:auto;
+    display:flex;
+    justify-content:center;
+    padding:50px 15px;
+    color:white;
+}
+
+/* PANTALLAS */
+.pantalla{
+    width:100%;
+    max-width:800px;
+    text-align:center;
+    display:none;
+}
+
+/* BOTONES */
+.boton{
+    margin:12px auto;
+    padding:14px 26px;
+    background:#1e7f3b;
+    color:white;
+    border:none;
+    border-radius:25px;
+    font-size:16px;
+    width:80%;
+    max-width:300px;
+    cursor:pointer;
+}
+
+/* INICIO */
+.sobre{
+    font-size:80px;
+    margin-top:200px;
+    cursor:pointer;
+    animation:latido 1.5s infinite;
+}
+@keyframes latido{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.1)}
+}
+
+/* CARTA */
+.carta{
+    background:
+      url("https://www.transparenttextures.com/patterns/paper-fibers.png"),
+      #fffaf0;
+    color:#333;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+.titulo{
+    color:#b11226;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+/* PANEL */
+.panel{
+    background:rgba(255,255,255,.95);
+    color:#333;
+    padding:5px;
+    border-radius:18px;
+    border:3px solid #b11226;
+    box-shadow:0 0 15px rgba(177,18,38,.4);
+}
+
+/* TEXTOS */
+.mensaje{
+    font-size:18px;
+    margin:15px 0;
+    color:#b11226;
+}
+.texto-medio{
+    font-size:16px;
+    text-align: justify;
+    margin-left: 1px;
+    margin-right: 1px;
+    text-emphasis: none;
+    margin:18px 0;
+    font-style:italic;
+    color:#444;
+}
+
+/* IMÁGENES */
+.imagenes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.item-img{
+    background:white;
+    padding:6px;
+    border-radius:5px;
+    box-shadow:0 6px 15px rgba(0,0,0,.3);
+}
+
+.item-img img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.pie{
+    font-size:13px;
+    margin-top:6px;
+    color:#555;
+    font-family:cursive;
+}
+
+/* DECORACIÓN */
+.panel::after{
+    content:"❄ ❄ ❄ ❄ ❄";
+    display:block;
+    margin-top:15px;
+    opacity:.25;
+}
+.separador{
+    margin:15px 0;
+    font-size:20px;
+    color:#b11226;
+}
+/* FOTOS EN HORIZONTAL */
+#fotos .imagenes{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    padding-bottom:10px;
+    scroll-snap-type:x mandatory;
+}
+
+#fotos .item-img{
+    min-width:240px;
+    flex-shrink:0;
+    scroll-snap-align:center;
+    
+}
+#juegos .imagenes{
+    display:flex;
+    gap:15px;
+    overflow-x:auto;
+    padding-bottom:10px;
+    scroll-snap-type:x mandatory;
+}
+
+#juegos .item-img{
+    min-width:240px;
+    flex-shrink:0;
+    scroll-snap-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<video class="video-fondo" autoplay muted loop playsinline>
+    <source src="https://i.imgur.com/pS5MOcl.mp4">
+</video>
+<div class="overlay"></div>
+
+<div class="contenedor">
+
+<!-- INICIO -->
+<div id="inicio" class="pantalla" style="display:block;">
+    <div class="sobre" onclick="mostrar('carta')">📩</div>
+    <p>Presione para abrir</p>
+</div>
+
+<!-- CARTA -->
+<div id="carta" class="pantalla">
+    <div class="carta">
+        <div class="titulo">🎄 Feliz Navidad 🎄</div>
+        <p>Por esta navidad y las que faltan,
+            mi amor por ti crece cada año.</p>
+        <p>Gracias por todo lo bonito que compartimos
+            y por cada sonrisa que me has causado, todo lo
+            guardo en mi corazon.</p>
+        <div style="margin-top:15px;font-style:italic;color:#b11226;">
+            — Siempre contigo 💖
+        </div>
+        <button class="boton" onclick="mostrar('intermedio')">💖 Continuar</button>
+    </div>
+</div>
+
+<!-- INTERMEDIA -->
+<div id="intermedio" class="pantalla panel">
+    <div class="mensaje">✨ Aquí son cosas que me recuerdan a ti ✨</div>
+    <div class="separador">♡ ♡ ♡</div>
+
+    <button class="boton" onclick="mostrar('personajes')">🎭 Personajes</button>
+    <button class="boton" onclick="mostrar('fotos')">📸 Fotos juntos</button>
+    <button class="boton" onclick="mostrar('juegos')">🎮 Juegos</button>
+
+    <div class="texto-medio">
+        — Cuando te ví y te conocí, supe que era un momento muy especial, te agradezco
+        por traerme tanta felicidad y por ser tan linda y preciosa conmigo. Se que es dificil
+        ser una pareja tan joven, pero tengo mucha esperanza en lo nuestro. Se que tu daras lo mejor de ti, igual que yo.
+        En este apartado, quise expresar donde y cuando te veo en mi vida cotidiana, y aunque se que no es mucho, quiero demostrarte
+        el amor que tengo por ti. 
+        Te amo de todo corazon, eres mi todo, gracias por ser como eres conmigo, y permiterme crecer, ser mejor persona, para ti, y por
+        supuesto, para mi. 💖 💖
+    </div>
+
+    <button class="boton" onclick="mostrar('inicio')">🏠 Volver al inicio</button>
+</div>
+
+<!-- PERSONAJES -->
+<div id="personajes" class="pantalla panel">
+    <h3>🎭 Personajes</h3>
+    <div class="texto-medio">
+        Estos son los personajes que mas me recuerdan a ti, y no por solamente vista o personalidad, si no porque, tu lo has dicho.
+        Cuando los veo, recuerdo cuan feliz soy contigo y como quiero permanecer en tu vida.
+    </div>
+
+    <div class="imagenes">
+        <div class="item-img">
+            <img src="https://cdn.pfps.gg/pfps/3495-misa-death-note-profile-image.png">
+            <div class="pie">Misa Amane</div>
+        </div>
+        <div class="item-img">
+            <img src="https://i.pinimg.com/originals/d7/20/ad/d720ad2844d63e5d0f738aa92e581d28.jpg">
+            <div class="pie">Shizuku Murasaki</div>
+        </div>
+        <div class="item-img">
+            <img src="https://cdn.shopify.com/s/files/1/1083/2612/files/cr2_480x480.png">
+            <div class="pie">Cinnamoroll</div>
+        </div>
+    </div>
+
+    <button class="boton" onclick="mostrar('intermedio')">🔙 Elegir otra cosa</button>
+</div>
+
+<!-- FOTOS -->
+<div id="fotos" class="pantalla panel">
+    <h3>📸 Fotos juntos</h3>
+    <div class="texto-medio">
+        Momentos que siempre voy a guardar conmigo.
+    </div>
+
+    <div class="imagenes">
+        <div class="item-img">
+            <img src="https://i.imgur.com/rhaIZga.jpeg">
+            <div class="pie">Tu cumpleaños</div>
+        </div>
+        <div class="item-img">
+            <img src="https://i.imgur.com/vwuY7za.jpeg">
+            <div class="pie">Nuestro primer beso</div>
+        </div>
+        <div class="item-img">
+            <img src="https://imgur.com/80On9nu.jpeg">
+            <div class="pie">Un recuerdo</div>
+        </div>
+    </div>
+
+    <button class="boton" onclick="mostrar('intermedio')">🔙 Elegir otra cosa</button>
+</div>
+
+<!-- JUEGOS -->
+<div id="juegos" class="pantalla panel">
+    <h3>🎮 Juegos</h3>
+    <div class="texto-medio">
+        Porque contigo todo siempre se siente más divertido.
+    </div>
+
+    <div class="imagenes">
+        <div class="item-img">
+            <img src="https://i.imgur.com/pdQH1qI.png[/">
+            <div class="pie">Muchas risas</div>
+        </div>
+        <div class="item-img">
+            <img src="https://i.imgur.com/Xc9ywNS.jpeg">
+            <div class="pie">Nuestro juego</div>
+        </div>
+        <div class="item-img">
+            <img src="https://i.imgur.com/hY4zHMu.jpeg">
+            <div class="pie">Siempre juntos ¨se me acabaron los juegos¨</div>
+        </div>
+    </div>
+
+    <button class="boton" onclick="mostrar('intermedio')">🔙 Elegir otra cosa</button>
+</div>
+
+</div>
+
+<script>
+function mostrar(id){
+    document.querySelectorAll('.pantalla').forEach(p=>p.style.display='none');
+    document.getElementById(id).style.display='block';
+    window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
